@@ -3,7 +3,6 @@
 
 /// <reference types="node" />
 
-import { Agent } from 'http';
 
 import * as Transport from 'winston-transport';
 
@@ -24,72 +23,6 @@ declare namespace winston {
     new (options?: ConsoleTransportOptions): ConsoleTransportInstance;
   }
 
-  interface FileTransportOptions extends Transport.TransportStreamOptions {
-    filename?: string;
-    dirname?: string;
-    options?: object;
-    maxsize?: number;
-    stream?: NodeJS.WritableStream;
-    rotationFormat?: Function;
-    zippedArchive?: boolean;
-    maxFiles?: number;
-    eol?: string;
-    tailable?: boolean;
-    lazy?: boolean;
-  }
-
-  interface FileTransportInstance extends Transport {
-    name: string;
-    filename: string;
-    dirname: string;
-    options: object;
-    maxsize: number | null;
-    rotationFormat: Function | boolean;
-    zippedArchive: boolean;
-    maxFiles: number | null;
-    eol: string;
-    tailable: boolean;
-    lazy: boolean;
-
-    new (options?: FileTransportOptions): FileTransportInstance;
-  }
-
-  interface HttpTransportOptions extends Transport.TransportStreamOptions {
-    ssl?: any;
-    host?: string;
-    port?: number;
-    auth?: {
-      username?: string | undefined;
-      password?: string | undefined;
-      bearer?: string | undefined;
-    };
-    path?: string;
-    agent?: Agent;
-    headers?: object;
-    batch?: boolean;
-    batchInterval?: number;
-    batchCount?: number;
-    replacer?: (key: string, value: any) => any;
-    maximumDepth?: number;
-  }
-
-  interface HttpTransportInstance extends Transport {
-    name: string;
-    ssl: boolean;
-    host: string;
-    maximumDepth: number;
-    port: number;
-    auth?: {
-      username?: string | undefined;
-      password?: string | undefined;
-      bearer?: string | undefined;
-    };
-    path: string;
-    agent?: Agent | null;
-
-    new (options?: HttpTransportOptions): HttpTransportInstance;
-  }
-
   interface StreamTransportOptions extends Transport.TransportStreamOptions {
     stream: NodeJS.WritableStream;
     eol?: string;
@@ -102,12 +35,8 @@ declare namespace winston {
   }
 
   interface Transports {
-    FileTransportOptions: FileTransportOptions;
-    File: FileTransportInstance;
     ConsoleTransportOptions: ConsoleTransportOptions;
     Console: ConsoleTransportInstance;
-    HttpTransportOptions: HttpTransportOptions;
-    Http: HttpTransportInstance;
     StreamTransportOptions: StreamTransportOptions;
     Stream: StreamTransportInstance;
   }
